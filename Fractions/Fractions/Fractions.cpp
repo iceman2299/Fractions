@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 #include "Fractions.h"
 
+int checkcode = 0;
 
 fraction::fraction()
 {
@@ -14,19 +15,40 @@ fraction::fraction(const fraction& f)
 	denum = f.denum;
 }
 
-fraction::fraction(int n, int d)
+int checkzero(int denum)
 {
-	while (d == 0)
+	while (denum == 0)
 	{
 		std::cerr << "Ошибка, знаменатель не может быть нулём" << std::endl;
+		return 1;
 	}
+}
+
+fraction::fraction(int n, int d)
+{
 	num = n;
 	denum = d;
 }
 
 fraction::fraction(double val)
 {
-
+	int znak = 1;
+	denum = 1;
+	if (val < 0)
+	{
+		znak = -1;
+	}
+	int step = 0;
+	while (val < 1)
+	{
+		val = val * 10;
+		step = step + 1;
+	}
+	num = int(val) * znak;
+	for (int i = 0; i < step; i++)
+	{
+		denum = denum * 10;
+	}
 }
 
 int nod(int a, int b)
@@ -55,7 +77,7 @@ void fraction::reduce()
 {
 	int n = nod(num, denum);
 	num = num / n;
-	denum = denum = n;
+	denum = denum / n;
 }
 
 fraction fraction::operator+(const fraction& op2)
@@ -100,14 +122,32 @@ std::ostream& operator<<(std::ostream& os, const fraction& f)
 	return os;
 }
 
+std::istream& operator>>(std::istream& is, fraction& f)
+{
+	std::cout << "Введите числитель или десятичную дробь" << std::endl;
+	double time;
+	is >> time;
+	f = time;
+	if (f.denum < 10)
+	{
+		std::cout << "Введите знаменатель" << std::endl;
+		is >> f.denum;
+	}
+	return is;
+}
+
+
 int main()
 {
 	setlocale(LC_ALL, "Russian");
-	int a = 5;
-	int b = 0;
-	fraction f(a, b);
-	fraction c = f + f;
-	std::cout << c;
+	std::cout << "Введите первое число" << std::endl;
+	fraction f;
+	std::cin >> f;
+	std::cout << "Введите второе число" << std::endl;
+	fraction k;
+	std::cin >> k;
+	fraction t = f + k;
+	std::cout << "Сумма чисел = " << t;
 
 
 }
