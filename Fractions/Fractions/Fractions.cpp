@@ -18,7 +18,7 @@ fraction::fraction(int n, int d)
 {
     while (d == 0)
     {
-        std::cerr << "Îøèáêà, çíàìåíàòåëü íå ìîæåò áûòü íóëåì" << std::endl;
+        std::cerr << "ÐžÑˆÐ¸Ð±ÐºÐ°, Ð·Ð½Ð°Ð¼ÐµÐ½Ð°Ñ‚ÐµÐ»ÑŒ Ð½Ðµ Ð¼Ð¾Ð¶ÐµÑ‚ Ð±Ñ‹Ñ‚ÑŒ Ð½ÑƒÐ»ÐµÐ¼" << std::endl;
     }
     num = n;
     denum = d;
