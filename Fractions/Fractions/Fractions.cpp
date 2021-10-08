@@ -33,15 +33,18 @@ fraction::fraction(int n, int d)
 fraction::fraction(double val)
 {
 	int znak = 1;
+	int c = 1;
 	denum = 1;
 	if (val < 0)
 	{
 		znak = -1;
 	}
 	int step = 0;
-	while (val < 1)
+	while (c > 0.0001)
 	{
 		val = val * 10;
+		int temp = int(val);
+		c = val - temp;
 		step = step + 1;
 	}
 	num = int(val) * znak;
